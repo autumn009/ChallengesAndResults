@@ -1,10 +1,17 @@
 ﻿@page "/"
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
 
-<ul>
-    <li>
-        <a href="/dance">理解度確認!　理解度増進!　C#基本演習ブック・ソースでダンス!　結果集計表</a>
-    </li>
-    <li>
-        <a href="/test">動作テスト用　結果集計表</a>
-    </li>
-</ul>
+<button class="btn btn-primary" onclick="@GoDance">理解度確認!　理解度増進!　C#基本演習ブック・ソースでダンス!　結果集計表</button>
+<br />
+<button class="btn" onclick="@GoTest">動作テスト用　結果集計表</button>
+
+@functions {
+    void GoDance()
+    {
+        UriHelper.NavigateTo("/list/clistdance.txt/Dance");
+    }
+    void GoTest()
+    {
+        UriHelper.NavigateTo("/list/clisttest1.txt/test");
+    }
+}

@@ -1,8 +1,21 @@
-﻿@page "/list"
+﻿@page "/list/{name}/{vname}"
 
 <h1>@Util.ManifestName</h1>
 
 @foreach (var item in Util.Names)
 {
     <p>@item</p>
+}
+
+@functions {
+    [Parameter]
+    private string Name { get; set; } = "";
+    [Parameter]
+    private string VName { get; set; } = "";
+
+    protected override void OnInit()
+    {
+        base.OnInit();
+        Util.SetResource(Name,VName);
+    }
 }
