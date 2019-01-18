@@ -4,22 +4,24 @@
 
 <table>
     <tr>
-        <th>Name</th>
-        <th>Try</th>
-        <th>Correct</th>
+        <th>[Name]</th>
+        <th>[Try]</th>
+        <th>[Correct]</th>
     </tr>
     @for (int i = 0; i < Util.Names.Count; i++)
     {
     <tr>
         <td>@Util.Names[i]</td>
         <td>
-            <div class="form-check">
+            <div class="form-check mycheck">
                 <input type="checkbox" class="form-check-input" id="try@i">
+                <label class="form-check-label" for="try@i"></label>
             </div>
         </td>
         <td>
-            <div class="form-check">
+            <div class="form-check mycheck">
                 <input type="checkbox" class="form-check-input" id="correct@i">
+                <label class="form-check-label" for="correct@i"></label>
             </div>
         </td>
     </tr>
