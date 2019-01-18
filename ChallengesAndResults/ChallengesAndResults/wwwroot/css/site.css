@@ -121,3 +121,9 @@ app {
         display: block;
     }
 }
+
+td {
+    border-style:solid;
+    border-color:black;
+    border-width:1px;
+}
