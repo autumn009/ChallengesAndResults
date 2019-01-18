@@ -1,2 +1,8 @@
 ﻿@page "/list"
 
+<h1>@Util.ManifestName</h1>
+
+@foreach (var item in Util.Names)
+{
+    <p>@item</p>
+}
