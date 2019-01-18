@@ -2,6 +2,30 @@
 
 <h1>@Util.ManifestName</h1>
 
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Try</th>
+        <th>Correct</th>
+    </tr>
+    @for (int i = 0; i < Util.Names.Count; i++)
+    {
+    <tr>
+        <td>@Util.Names[i]</td>
+        <td>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="try@i">
+            </div>
+        </td>
+        <td>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="correct@i">
+            </div>
+        </td>
+    </tr>
+    }
+</table>
+
 @foreach (var item in Util.Names)
 {
     <p>@item</p>
