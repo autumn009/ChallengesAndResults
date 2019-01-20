@@ -131,3 +131,11 @@ td {
 .mycheck {
     text-align: center;
 }
+
+label {
+    font-size: 2em;
+}
+
+input[type="checkbox"]:checked {
+    outline: inset 6px #ff0000;
+}
