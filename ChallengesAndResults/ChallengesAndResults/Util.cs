@@ -11,6 +11,10 @@ namespace ChallengesAndResults
     {
         public static List<string> Names;
         public static string ManifestName;
+        public static int TryRate = 0;
+        public static int CorrectRate = 0;
+        public static List<bool> TryChecks;
+        public static List<bool> CorrectChecks;
 
         public static void SetResource(string name, string cname)
         {
@@ -24,12 +28,16 @@ namespace ChallengesAndResults
                     for (; ; )
                     {
                         var s = reader.ReadLine();
-                        if (s == null) return;
+                        if (s == null) break;
                         if (s.StartsWith("#")) continue;
                         Names.Add(s);
                     }
                 }
             }
+            TryChecks = Enumerable.Repeat(true, Names.Count()).ToList();
+            CorrectChecks = Enumerable.Repeat(false, Names.Count()).ToList();
         }
+        public static int GetTryRate() => TryChecks.Count(c => c) * 100 / TryChecks.Count();
+        public static int GetCorrectRate() => CorrectChecks.Count(c => c) * 100 / CorrectChecks.Count();
     }
 }

@@ -1,7 +1,10 @@
 ﻿@page "/list/{name}/{vname}"
 
     <header class="myheader">
-        <p>This is foxe3d header</p>
+        <p>
+            挑戦率: @Util.GetTryRate()%
+            正解率: @Util.GetCorrectRate()%
+        </p>
     </header>
 
     <div class="mycontent">
@@ -15,19 +18,20 @@
             </tr>
             @for (int i = 0; i < Util.Names.Count; i++)
             {
+                int i0 = i;
                 string t = "try" + i.ToString();
                 string c = "correct" + i.ToString();
                 <tr>
                     <td>@Util.Names[i]</td>
                     <td>
                         <div class="form-check mycheck">
-                            <input type="checkbox" class="form-check-input" id="@t">
+                            <input type="checkbox" class="form-check-input" id="@t" bind="@Util.TryChecks[i0]" />
                             <label class="form-check-label" for="@t">挑戦!</label>
                         </div>
                     </td>
                     <td>
                         <div class="form-check mycheck">
-                            <input type="checkbox" class="form-check-input" id="@c">
+                            <input type="checkbox" class="form-check-input" id="@c" bind="@Util.CorrectChecks[i0]" />
                             <label class="form-check-label" for="@c">正解!</label>
                         </div>
                     </td>
@@ -37,14 +41,16 @@
     </div>
 
         @functions {
-        [Parameter]
-        private string Name { get; set; } = "";
-        [Parameter]
-        private string VName { get; set; } = "";
+            [Parameter]
+            private string Name { get; set; } = "";
+            [Parameter]
+            private string VName { get; set; } = "";
 
-        protected override void OnInit()
-        {
-            base.OnInit();
-            Util.SetResource(Name, VName);
-        }
+            private bool tryFlag;
+
+            protected override void OnInit()
+            {
+                base.OnInit();
+                Util.SetResource(Name, VName);
+            }
         }
