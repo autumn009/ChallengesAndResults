@@ -150,3 +150,23 @@ input[type="checkbox"]:checked {
     padding-top: 3em;
 }
 
+.graph {
+    position: relative; /* IE is dumb */
+    width: 300px;
+    border: 1px solid #207870;
+    padding: 2px;
+}
+.graph .bar {
+    display: block;
+    position: relative;
+    background: #409890;
+    text-align: center;
+    color: #f0ffff;
+    height: 2em;
+    line-height: 2em;
+}
+
+.graph .bar span {
+    position: absolute;
+    left: 1em;
+}

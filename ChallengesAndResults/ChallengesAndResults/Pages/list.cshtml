@@ -2,8 +2,12 @@
 
     <header class="myheader">
         <p>
-            挑戦率: @Util.GetTryRate()% (@Util.TryChecks.Count(c => c)/@Util.TryChecks.Count())
-            正解率: @Util.GetCorrectRate()% (@Util.CorrectChecks.Count(c => c)/@Util.CorrectChecks.Count())
+            <div class="graph">
+                <span class="bar" style="width: @Util.GetTryRate()%;">挑戦率: @Util.GetTryRate()% (@Util.TryChecks.Count(c => c)/@Util.TryChecks.Count())</span>
+            </div>
+            <div class="graph">
+                <span class="bar" style="width: @Util.GetCorrectRate()%;">正解率: @Util.GetCorrectRate()% (@Util.CorrectChecks.Count(c => c)/@Util.CorrectChecks.Count())</span>
+            </div>
         </p>
     </header>
 
