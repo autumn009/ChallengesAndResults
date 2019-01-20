@@ -1,4 +1,7 @@
 @inherits BlazorLayoutComponent
+@using Blazor.Extensions.Storage
+@inject LocalStorage localStorage
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
 
 <div class="sidebar">
     <NavMenu />
@@ -13,3 +16,6 @@
         @Body
     </div>
 </div>
+@functions {
+protected override Task OnInitAsync() => Util.MainLayoutInitializeEntry(localStorage, UriHelper);
+}
