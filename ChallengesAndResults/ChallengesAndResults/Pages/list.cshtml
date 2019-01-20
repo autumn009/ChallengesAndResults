@@ -2,8 +2,8 @@
 
     <header class="myheader">
         <p>
-            挑戦率: @Util.GetTryRate()%
-            正解率: @Util.GetCorrectRate()%
+            挑戦率: @Util.GetTryRate()% (@Util.TryChecks.Count(c => c)/@Util.TryChecks.Count())
+            正解率: @Util.GetCorrectRate()% (@Util.CorrectChecks.Count(c => c)/@Util.CorrectChecks.Count())
         </p>
     </header>
 

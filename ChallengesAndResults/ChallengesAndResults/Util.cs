@@ -34,7 +34,7 @@ namespace ChallengesAndResults
                     }
                 }
             }
-            TryChecks = Enumerable.Repeat(true, Names.Count()).ToList();
+            TryChecks = Enumerable.Repeat(false, Names.Count()).ToList();
             CorrectChecks = Enumerable.Repeat(false, Names.Count()).ToList();
         }
         public static int GetTryRate() => TryChecks.Count(c => c) * 100 / TryChecks.Count();
