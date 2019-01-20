@@ -38,6 +38,11 @@ namespace ChallengesAndResults
             CorrectChecks = Enumerable.Repeat(false, Names.Count()).ToList();
         }
         public static int GetTryRate() => TryChecks.Count(c => c) * 100 / TryChecks.Count();
-        public static int GetCorrectRate() => CorrectChecks.Count(c => c) * 100 / CorrectChecks.Count();
+        public static int GetCorrectRate()
+        {
+            int r = TryChecks.Count(c => c);
+            if (r == 0) return 0;
+            return CorrectChecks.Count(c => c) * 100 / r;
+        }
     }
 }

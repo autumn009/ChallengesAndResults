@@ -3,10 +3,12 @@
     <header class="myheader">
         <p>
             <div class="graph">
-                <span class="bar" style="width: @Util.GetTryRate()%;">挑戦率: @Util.GetTryRate()% (@Util.TryChecks.Count(c => c)/@Util.TryChecks.Count())</span>
+                <span style="position:absolute;z-index:10;color:white;">挑戦率: @Util.GetTryRate()% (@Util.TryChecks.Count(c => c)/@Util.TryChecks.Count())</span>
+                <span class="bar" style="width: @Util.GetTryRate()%;"></span>
             </div>
             <div class="graph">
-                <span class="bar" style="width: @Util.GetCorrectRate()%;">正解率: @Util.GetCorrectRate()% (@Util.CorrectChecks.Count(c => c)/@Util.CorrectChecks.Count())</span>
+                <span style="position:absolute;z-index:10;color:white;">正解率: @Util.GetCorrectRate()% (@Util.CorrectChecks.Count(c => c)/@Util.TryChecks.Count(c => c))</span>
+                <span class="bar" style="background:Blue;width: @Util.GetCorrectRate()%;"></span>
             </div>
         </p>
     </header>
