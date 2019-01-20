@@ -139,3 +139,14 @@ label {
 input[type="checkbox"]:checked {
     outline: inset 6px #ff0000;
 }
+
+.myheader {
+    background: #ccc;
+    position: fixed;
+    width:100%;
+    height:3em;
+}
+.mycontent {
+    padding-top: 3em;
+}
+
