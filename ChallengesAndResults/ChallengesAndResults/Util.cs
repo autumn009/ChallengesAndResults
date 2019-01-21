@@ -84,19 +84,5 @@ namespace ChallengesAndResults
             await SaveBoolArray(TryChecks, "try");
             await SaveBoolArray(CorrectChecks, "correct");
         }
-
-        public static bool CheckFixer()
-        {
-            bool needToRender = false;
-            for (int i = 0; i < Names.Count; i++)
-            {
-                if (CorrectChecks[i] && !TryChecks[i])
-                {
-                    TryChecks[i] = true;
-                    needToRender = true;
-                }
-            }
-            return needToRender;
-        }
     }
 }
