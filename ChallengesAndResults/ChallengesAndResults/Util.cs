@@ -17,7 +17,6 @@ namespace ChallengesAndResults
         public static int CorrectRate = 0;
         public static List<bool> TryChecks;
         public static List<bool> CorrectChecks;
-        private static bool isDirty = false;
         public static LocalStorage localStorage { get; set; }
         public static Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper { get; set; }
 
@@ -73,11 +72,17 @@ namespace ChallengesAndResults
         private static async Task Load()
         {
             //Console.WriteLine("Load Callded");
-            TryChecks = Enumerable.Repeat(false, Names.Count()).ToList();
-            CorrectChecks = Enumerable.Repeat(false, Names.Count()).ToList();
+            clear();
             await LoadBoolArray(TryChecks, "try");
             await LoadBoolArray(CorrectChecks, "correct");
         }
+
+        public static void clear()
+        {
+            TryChecks = Enumerable.Repeat(false, Names.Count()).ToList();
+            CorrectChecks = Enumerable.Repeat(false, Names.Count()).ToList();
+        }
+
         public static async Task Save()
         {
             //Console.WriteLine("Save Callded");

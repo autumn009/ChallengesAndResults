@@ -32,18 +32,23 @@
                 <td>
                     <button type="button" class="@("btn "+(Util.TryChecks[i0]?"btn-dark":"btn-light"))" id="@t"
                             onclick="@(()=>updateTry(i0))">
-                        @(Util.TryChecks[i0]?"挑戦済":"未挑戦")
+                        @(Util.TryChecks[i0] ? "挑戦済" : "未挑戦")
                     </button>
                 </td>
                 <td>
                     <button type="button" class="@("btn "+(Util.CorrectChecks[i0]?"btn-dark":"btn-light"))" id="@c"
                             onclick="@(()=>updateCurrent(i0))" disabled="@(!Util.TryChecks[i0])">
-                        @(Util.CorrectChecks[i0]?"正解済":"未正解")
+                        @(Util.CorrectChecks[i0] ? "正解済" : "未正解")
                     </button>
                 </td>
             </tr>
         }
+
     </table>
+    <input type="file" />
+    <button type="button" class="btn btn-primary">Import</button>
+    <button type="button" class="btn btn-primary" onclick="@export">Export</button>
+    <button type="button" class="btn btn-primary" onclick="@clear">Clear</button>
 </div>
 
 @functions {
@@ -68,5 +73,13 @@
     {
         Util.TryChecks[index] = !Util.TryChecks[index];
         await Util.Save();
+    }
+    private void clear()
+    {
+        Util.uriHelper.NavigateTo($"/clearconf/{Name}/{VName}");
+    }
+    private void export()
+    {
+        Util.uriHelper.NavigateTo($"/export/{Name}/{VName}");
     }
 }

@@ -1,0 +1,31 @@
+﻿@page "/clearconf/{name}/{vname}"
+<h1>@Util.ManifestName</h1>
+
+<p>挑戦情報、正解情報を全てクリアします。クリアするとバックアップを取っていない限り復帰できません。クリアしますか?</p>
+
+<button type="button" class="btn btn-primary" onclick="@clear">Clear</button>
+<button type="button" class="btn btn-primary" onclick="@cancel">Cancel</button>
+
+@functions {
+    [Parameter]
+    private string Name { get; set; } = "";
+    [Parameter]
+    private string VName { get; set; } = "";
+
+    protected async override Task OnInitAsync()
+    {
+        base.OnInit();
+        await Util.SetResource(Name, VName);
+    }
+
+    private async void clear()
+    {
+        Util.clear();
+        await Util.Save();
+        Util.uriHelper.NavigateTo($"/list/{Name}/{VName}");
+    }
+    private void cancel()
+    {
+        Util.uriHelper.NavigateTo($"/list/{Name}/{VName}");
+    }
+}
