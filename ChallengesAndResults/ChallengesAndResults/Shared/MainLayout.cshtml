@@ -2,20 +2,23 @@
 @using Blazor.Extensions.Storage
 @inject LocalStorage localStorage
 @inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
-
+<!--
 <div class="sidebar">
     <NavMenu />
 </div>
+    -->
 
 <div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
-    </div>
+    <!--
+        <div class="top-row px-4">
+            <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        </div>
+    -->
 
     <div class="content px-4">
         @Body
     </div>
 </div>
 @functions {
-protected override void OnInit() => Util.MainLayoutInitializeEntry(localStorage, UriHelper);
+    protected override void OnInit() => Util.MainLayoutInitializeEntry(localStorage, UriHelper);
 }
