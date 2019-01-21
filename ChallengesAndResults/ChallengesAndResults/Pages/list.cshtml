@@ -30,16 +30,16 @@
             <tr>
                 <td>@Util.Names[i]</td>
                 <td>
-                    <div class="form-check mycheck">
-                        <input type="checkbox" class="form-check-input" id="@t" bind="@Util.TryChecks[i0]"  />
-                        <label class="form-check-label" for="@t">挑戦!</label>
-                    </div>
+                    <button type="button" class="@("btn "+(Util.TryChecks[i0]?"btn-dark":"btn-light"))" id="@t"
+                            onclick="@(()=>updateTry(i0))">
+                        @(Util.TryChecks[i0]?"挑戦済":"未挑戦")
+                    </button>
                 </td>
                 <td>
-                    <div class="form-check mycheck">
-                        <input type="checkbox" class="form-check-input" id="@c" bind="@Util.CorrectChecks[i0]"  />
-                        <label class="form-check-label" for="@c">正解!</label>
-                    </div>
+                    <button type="button" class="@("btn "+(Util.CorrectChecks[i0]?"btn-dark":"btn-light"))" id="@c"
+                            onclick="@(()=>updateCurrent(i0))">
+                        @(Util.CorrectChecks[i0]?"正解済":"未正解")
+                    </button>
                 </td>
             </tr>
         }
@@ -59,13 +59,14 @@
         base.OnInit();
         await Util.SetResource(Name, VName);
     }
-    protected async override Task OnAfterRenderAsync()
+    private async void updateCurrent(int index)
     {
-        await base.OnAfterRenderAsync();
-        //var needToRender = Util.CheckFixer();
-        //if (needToRender)
-        //this.StateHasChanged();
-        //else 
+        Util.CorrectChecks[index] = !Util.CorrectChecks[index];
+        await Util.Save();
+    }
+    private async void updateTry(int index)
+    {
+        Util.TryChecks[index] = !Util.TryChecks[index];
         await Util.Save();
     }
 }
