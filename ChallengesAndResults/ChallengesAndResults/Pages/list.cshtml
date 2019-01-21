@@ -62,6 +62,10 @@
     protected async override Task OnAfterRenderAsync()
     {
         await base.OnAfterRenderAsync();
+        //var needToRender = Util.CheckFixer();
+        //if (needToRender)
+        //this.StateHasChanged();
+        //else 
         await Util.Save();
     }
 }
