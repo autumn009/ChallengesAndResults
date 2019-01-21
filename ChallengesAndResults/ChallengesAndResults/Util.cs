@@ -20,7 +20,7 @@ namespace ChallengesAndResults
         public static LocalStorage localStorage { get; set; }
         public static Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper { get; set; }
 
-        public static void SetResource(string name, string cname)
+        public static async Task SetResource(string name, string cname)
         {
             ManifestName = cname;
             Names = new List<string>();
@@ -38,8 +38,7 @@ namespace ChallengesAndResults
                     }
                 }
             }
-            TryChecks = Enumerable.Repeat(false, Names.Count()).ToList();
-            CorrectChecks = Enumerable.Repeat(false, Names.Count()).ToList();
+            await Load();
         }
         public static int GetTryRate() => TryChecks.Count(c => c) * 100 / TryChecks.Count();
         public static int GetCorrectRate()
@@ -48,24 +47,41 @@ namespace ChallengesAndResults
             if (r == 0) return 0;
             return CorrectChecks.Count(c => c) * 100 / r;
         }
-        public static async Task MainLayoutInitializeEntry(LocalStorage localStorage0, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper0)
+        public static void MainLayoutInitializeEntry(LocalStorage localStorage0, Microsoft.AspNetCore.Blazor.Services.IUriHelper uriHelper0)
         {
             localStorage = localStorage0;
             uriHelper = uriHelper0;
-            await Load();
         }
 
+        private static async Task LoadBoolArray(List<bool> target, string name)
+        {
+            var r = await localStorage.GetItem<bool[]>(name + "_" + ManifestName);
+            if (r != null)
+            {
+                for (int i = 0; i < Math.Min(r.Length, Names.Count); i++)
+                {
+                    target[i] = r[i];
+                }
+            }
+        }
+        private static async Task SaveBoolArray(List<bool> target, string name)
+        {
+            if (target == null) return;
+            await localStorage.SetItem<bool[]>(name + "_" + ManifestName, target.ToArray());
+        }
         private static async Task Load()
         {
-            // TBW
-            await Task.Delay(0);
-            //throw new NotImplementedException();
+            Console.WriteLine("Load Callded");
+            TryChecks = Enumerable.Repeat(false, Names.Count()).ToList();
+            CorrectChecks = Enumerable.Repeat(false, Names.Count()).ToList();
+            await LoadBoolArray(TryChecks, "try");
+            await LoadBoolArray(CorrectChecks, "correct");
         }
-        private static async Task Save()
+        public static async Task Save()
         {
-            // TBW
-            await Task.Delay(0);
-            //throw new NotImplementedException();
+            Console.WriteLine("Save Callded");
+            await SaveBoolArray(TryChecks, "try");
+            await SaveBoolArray(CorrectChecks, "correct");
         }
     }
 }

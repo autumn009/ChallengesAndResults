@@ -1,62 +1,66 @@
 ﻿@page "/list/{name}/{vname}"
 
-    <header class="myheader">
-        <p>
-            <div class="graph">
-                <span style="position:absolute;z-index:10;color:white;">挑戦率: @Util.GetTryRate()% (@Util.TryChecks.Count(c => c)/@Util.TryChecks.Count())</span>
-                <span class="bar" style="width: @Util.GetTryRate()%;"></span>
-            </div>
-            <div class="graph">
-                <span style="position:absolute;z-index:10;color:white;">正解率: @Util.GetCorrectRate()% (@Util.CorrectChecks.Count(c => c)/@Util.TryChecks.Count(c => c))</span>
-                <span class="bar" style="background:Blue;width: @Util.GetCorrectRate()%;"></span>
-            </div>
-        </p>
-    </header>
+<header class="myheader">
+    <p>
+        <div class="graph">
+            <span style="position:absolute;z-index:10;color:white;">挑戦率: @Util.GetTryRate()% (@Util.TryChecks.Count(c => c)/@Util.TryChecks.Count())</span>
+            <span class="bar" style="width: @Util.GetTryRate()%;"></span>
+        </div>
+        <div class="graph">
+            <span style="position:absolute;z-index:10;color:white;">正解率: @Util.GetCorrectRate()% (@Util.CorrectChecks.Count(c => c)/@Util.TryChecks.Count(c => c))</span>
+            <span class="bar" style="background:Blue;width: @Util.GetCorrectRate()%;"></span>
+        </div>
+    </p>
+</header>
 
-    <div class="mycontent">
-        <h1>@Util.ManifestName</h1>
+<div class="mycontent">
+    <h1>@Util.ManifestName</h1>
 
-        <table>
+    <table>
+        <tr>
+            <th>[Name]</th>
+            <th>[Try]</th>
+            <th>[Correct]</th>
+        </tr>
+        @for (int i = 0; i < Util.Names.Count; i++)
+        {
+            int i0 = i;
+            string t = "try" + i.ToString();
+            string c = "correct" + i.ToString();
             <tr>
-                <th>[Name]</th>
-                <th>[Try]</th>
-                <th>[Correct]</th>
+                <td>@Util.Names[i]</td>
+                <td>
+                    <div class="form-check mycheck">
+                        <input type="checkbox" class="form-check-input" id="@t" bind="@Util.TryChecks[i0]" onclick="@onchange" />
+                        <label class="form-check-label" for="@t">挑戦!</label>
+                    </div>
+                </td>
+                <td>
+                    <div class="form-check mycheck">
+                        <input type="checkbox" class="form-check-input" id="@c" bind="@Util.CorrectChecks[i0]" onclick="@onchange" />
+                        <label class="form-check-label" for="@c">正解!</label>
+                    </div>
+                </td>
             </tr>
-            @for (int i = 0; i < Util.Names.Count; i++)
-            {
-                int i0 = i;
-                string t = "try" + i.ToString();
-                string c = "correct" + i.ToString();
-                <tr>
-                    <td>@Util.Names[i]</td>
-                    <td>
-                        <div class="form-check mycheck">
-                            <input type="checkbox" class="form-check-input" id="@t" bind="@Util.TryChecks[i0]" />
-                            <label class="form-check-label" for="@t">挑戦!</label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-check mycheck">
-                            <input type="checkbox" class="form-check-input" id="@c" bind="@Util.CorrectChecks[i0]" />
-                            <label class="form-check-label" for="@c">正解!</label>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
-
-        @functions {
-            [Parameter]
-            private string Name { get; set; } = "";
-            [Parameter]
-            private string VName { get; set; } = "";
-
-            private bool tryFlag;
-
-            protected override void OnInit()
-            {
-                base.OnInit();
-                Util.SetResource(Name, VName);
-            }
         }
+    </table>
+</div>
+
+@functions {
+    [Parameter]
+    private string Name { get; set; } = "";
+    [Parameter]
+    private string VName { get; set; } = "";
+
+    private bool tryFlag;
+
+    protected async override Task OnInitAsync()
+    {
+        base.OnInit();
+        await Util.SetResource(Name, VName);
+    }
+    private async void onchange()
+    {
+        await Util.Save();
+    }
+}
