@@ -37,7 +37,7 @@
                 </td>
                 <td>
                     <button type="button" class="@("btn "+(Util.CorrectChecks[i0]?"btn-dark":"btn-light"))" id="@c"
-                            onclick="@(()=>updateCurrent(i0))">
+                            onclick="@(()=>updateCurrent(i0))" disabled="@(!Util.TryChecks[i0])">
                         @(Util.CorrectChecks[i0]?"正解済":"未正解")
                     </button>
                 </td>
