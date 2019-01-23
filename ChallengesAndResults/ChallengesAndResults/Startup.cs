@@ -6,6 +6,14 @@ namespace ChallengesAndResults
 {
     public class Startup
     {
+        // this is workaround for Blazor 0.70
+        // https://github.com/mono/mono/issues/11848
+        static Startup()
+        {
+            typeof(System.ComponentModel.INotifyPropertyChanging).GetHashCode();
+            typeof(System.ComponentModel.INotifyPropertyChanged).GetHashCode();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             // Add Blazor.Extensions.Storage

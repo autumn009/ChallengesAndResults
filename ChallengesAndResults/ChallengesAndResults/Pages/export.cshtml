@@ -1,0 +1,25 @@
+﻿@page "/export/{name}/{vname}"
+<h1>@Util.ManifestName</h1>
+
+<p>バックアップデータをエクスポートします。</p>
+
+<a href="@Util.Export()">Export</a>
+<button type="button" class="btn btn-primary" onclick="@ret">Return</button>
+
+@functions {
+[Parameter]
+private string Name { get; set; } = "";
+[Parameter]
+private string VName { get; set; } = "";
+
+protected async override Task OnInitAsync()
+{
+    base.OnInit();
+    await Util.SetResource(Name, VName);
+}
+
+private void ret()
+{
+    Util.uriHelper.NavigateTo($"/list/{Name}/{VName}");
+}
+}

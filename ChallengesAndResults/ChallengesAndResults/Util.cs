@@ -6,6 +6,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Blazor.Components;
+using Newtonsoft.Json;
+using System.Text;
 
 namespace ChallengesAndResults
 {
@@ -88,6 +90,27 @@ namespace ChallengesAndResults
             //Console.WriteLine("Save Callded");
             await SaveBoolArray(TryChecks, "try");
             await SaveBoolArray(CorrectChecks, "correct");
+        }
+        class SerializeContainer
+        {
+            public bool[] tryChecks;
+            public bool[] correctChecks;
+        }
+        // this is workaround for Blazor 0.70
+        // https://github.com/mono/mono/issues/11848
+        public static void Workaround()
+        {
+            typeof(System.Collections.Specialized.INotifyCollectionChanged).GetHashCode();
+        }
+        public static string Export()
+        {
+            Workaround();
+            var container = new SerializeContainer();
+            container.tryChecks = TryChecks.ToArray();
+            container.correctChecks = CorrectChecks.ToArray();
+            var json = JsonConvert.SerializeObject(container);
+            var bytear = Encoding.UTF8.GetBytes(json);
+            return "data:application/octet-stream;base64," + Convert.ToBase64String(bytear);
         }
     }
 }
