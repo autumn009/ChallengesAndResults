@@ -45,7 +45,7 @@
         }
 
     </table>
-    Import: <input type="file" onchange="handleFileSelect(this.files);" />
+    Import: <input type="file" onchange="handleFileSelect(this.files); this.value = null;" />
     <button type="button" class="btn btn-primary" onclick="@export">Export</button>
     <button type="button" class="btn btn-primary" onclick="@clear">Clear</button>
 
@@ -86,7 +86,7 @@
     }
     public void StateHasChangedProxy()
     {
-        Console.WriteLine("this.StateHasChanged();");
+        //Console.WriteLine("this.StateHasChanged();");
         this.StateHasChanged();
     }
 }

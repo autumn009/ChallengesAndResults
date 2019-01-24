@@ -121,22 +121,22 @@ namespace ChallengesAndResults
         [JSInvokable]
         public static void Upload(string base64)
         {
-            Console.WriteLine("Upload called");
+            //Console.WriteLine("Upload called");
             Workaround();
             clear();
             byte[] bytes = Convert.FromBase64String(base64);
             var s = Encoding.UTF8.GetString(bytes);
-            Console.WriteLine(s);
+            //Console.WriteLine(s);
             var deserialized = JsonConvert.DeserializeObject<SerializeContainer>(s);
-            Console.WriteLine(deserialized.tryChecks.Count());
+            //Console.WriteLine(deserialized.tryChecks.Count());
             for (int i = 0; i < Math.Min(Names.Count(), deserialized.tryChecks.Count()); i++)
             {
-                Console.WriteLine(deserialized.tryChecks[i]);
+                //Console.WriteLine(deserialized.tryChecks[i]);
                 TryChecks[i] = deserialized.tryChecks[i];
             }
             for (int i = 0; i < Math.Min(Names.Count(), deserialized.correctChecks.Count()); i++)
             {
-                Console.WriteLine(deserialized.correctChecks[i]);
+                //Console.WriteLine(deserialized.correctChecks[i]);
                 CorrectChecks[i] = deserialized.correctChecks[i];
             }
             PageRefer.StateHasChangedProxy();
