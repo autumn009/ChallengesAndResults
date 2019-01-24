@@ -1,4 +1,4 @@
-﻿abstract
+abstract
 as
 base
 bool
@@ -120,4 +120,4 @@ x = y
 x += y/x -= y/x *= y/x /= y/x %= y/x &= y/x |= y/x ^= y/x <<= y/x >>= y
 =>
 System.Action
-# created 2019/01/16 16:03:58 +09:00
+# created 2019/01/24 15:46:16 +09:00
